@@ -24,7 +24,6 @@ public class WebConfig {
                 .csrf(csrf->csrf.disable())
                 .cors(cors->cors.configurationSource(apiConfigurationSource()))
                 .authorizeHttpRequests(req->req.anyRequest().permitAll());
-
         return http.build();
     }
 

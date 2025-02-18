@@ -21,7 +21,7 @@ public class JwtValidatorFilter extends OncePerRequestFilter {
         String jwt= request.getHeader(ApplicationConstant.JWT_HEADER);
 
         if (jwt!=null){
-            jwt= jwt.substring(7)
+            jwt= jwt.substring(7);
              SecretKey secretKey= Keys.hmacShaKeyFor(ApplicationConstant.JWT_SECRET_KEY.getBytes(StandardCharsets.UTF_8));
              if(secretKey!=null){
                  Claims claims= Jwts.parser().verifyWith(secretKey)
@@ -33,5 +33,6 @@ public class JwtValidatorFilter extends OncePerRequestFilter {
 
 
         }
+        filterChain.doFilter(request, response);
     }
 }

@@ -30,6 +30,7 @@ public class AuthController {
     private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
+
     @PostMapping("/signIn")
     public ResponseEntity<AuthResponse> signIn(@RequestBody LogInRequest request){
         String email= request.getEmail();
@@ -42,28 +43,29 @@ public class AuthController {
             jwt= jwtGenerator.GenerateToken(authenticationResponse);
         }
         return ResponseEntity.status(HttpStatus.OK).header(ApplicationConstant.JWT_HEADER,jwt)
-                .body(new AuthResponse()); //NOT DONE
+                .body(new AuthResponse(jwt, "Login success" , HttpStatus.OK.value() ));
     }
 
 
-    @PostMapping("/signUp")
+    @PostMapping("/register")
     public ResponseEntity<AuthResponse> signUp(@RequestBody User user){
         User exittedUser = userRepository.findByEmail(user.getEmail()).orElse(null);
         if(exittedUser!=null){
             throw new  BadCredentialsException("Email is already exist");
         }
-        String hasPwd= passwordEncoder.encode(user.getPassword());
-        user.setPassword(hasPwd);
+        String hashPwd= passwordEncoder.encode(user.getPassword());
+        user.setPassword(hashPwd);
         User savedUser= userRepository.save(user);
         if (savedUser.getId()>0){
-            String message="Given user detail is successfully registered";
-            int code= HttpStatus.CREATED.value();
             return  ResponseEntity.status(HttpStatus.CREATED)
-                    .body(new AuthResponse());
+                    .body(new AuthResponse(null,
+                           "Given user details are successfully registered",
+                                    HttpStatus.CREATED.value()));
         }else{
             return  ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(new AuthResponse());
+                    .body(new AuthResponse(null,
+                            "User registration failed",
+                                     HttpStatus.BAD_REQUEST.value()));
         }
-
     }
 }

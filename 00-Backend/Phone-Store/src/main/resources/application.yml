@@ -5,3 +5,7 @@ spring:
     username: springstudent
     password: springstudnet
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

@@ -1,8 +1,10 @@
 package com.MTlovec.Phone_Store.model;
 
+import jakarta.persistence.Entity;
+
 import java.math.BigDecimal;
 import java.util.Date;
-
+@Entity
 public class Promotion {
     private Long id;
 
