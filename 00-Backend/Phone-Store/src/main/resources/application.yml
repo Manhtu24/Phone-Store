@@ -1,0 +1,7 @@
+#spring.application.name=Phone-Store
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/Phone-Store
+    username: springstudent
+    password: springstudnet
+    driver-class-name: com.mysql.cj.jdbc.Driver
