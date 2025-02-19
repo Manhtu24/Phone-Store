@@ -1,11 +1,20 @@
 package com.MTlovec.Phone_Store.model;
 
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.context.annotation.Lazy;
 
 import java.util.Date;
-@Data
+import java.util.Set;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
 public class User {
-    private  Long id;
+    @Id
+    private  Long userId;
 
     private  String email;
 
@@ -16,6 +25,12 @@ public class User {
      private USER_ROLE role= USER_ROLE.ROLE_USER;
 
      private Date createAt;
+
+     @OneToOne(mappedBy = "user")
+     private UserDetail userDetail;
+
+     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+     private Set<Order> orders;
 
 
 }

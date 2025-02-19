@@ -5,18 +5,22 @@ import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 import java.util.Date;
-
 @Data
-public class Payment {
-    private Long paymentId;
+public class ShippingInformation {
+    private Long shippingId;
 
-    private Date paymetDate;
+    private String address;
 
-    private String paymentStatus;
+    private String recipientName;
 
-    private String paymentMethod;
+    private  String phoneNumber;
+
+    private Date shippingDate;
+
+    private String guestNote;
 
     @JoinColumn(name = "order_id")
     @OneToOne
     private Order order;
+
 }

@@ -1,9 +1,19 @@
 package com.MTlovec.Phone_Store.model;
 
-public class Category {
-    private Long id;
+import java.util.Date;
 
-    private String name;
+public class Category {
+    private Long categoryId;
+
+    private String categoryName;
+
+    private String categoryDescription;
+
+    private Date createAt;
+
+
+
+
 
 
 }
