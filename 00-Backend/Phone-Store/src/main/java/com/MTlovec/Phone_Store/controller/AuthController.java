@@ -56,7 +56,7 @@ public class AuthController {
         String hashPwd= passwordEncoder.encode(user.getPassword());
         user.setPassword(hashPwd);
         User savedUser= userRepository.save(user);
-        if (savedUser.getId()>0){
+        if (savedUser.getUserId()>0){
             return  ResponseEntity.status(HttpStatus.CREATED)
                     .body(new AuthResponse(null,
                            "Given user details are successfully registered",

@@ -3,6 +3,7 @@ package com.MTlovec.Phone_Store.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.repository.cdi.Eager;
 
 import java.util.Date;
 import java.util.Set;
@@ -26,7 +27,7 @@ public class User {
 
      private Date createAt;
 
-     @OneToOne(mappedBy = "user")
+     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
      private UserDetail userDetail;
 
      @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

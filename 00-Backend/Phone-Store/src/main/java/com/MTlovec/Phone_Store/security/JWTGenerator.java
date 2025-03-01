@@ -26,6 +26,7 @@ public class JWTGenerator {
         return  jwt;
     }
 
+   
     public String getEmailFromJWT(String jwt){
         String subJWT= jwt.substring(7);
         Claims claims= Jwts.parser().verifyWith(secretKey)
