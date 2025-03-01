@@ -1,9 +1,11 @@
 package com.MTlovec.Phone_Store.service;
 
+import com.MTlovec.Phone_Store.model.USER_ROLE;
 import com.MTlovec.Phone_Store.model.User;
 import com.MTlovec.Phone_Store.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,9 +24,9 @@ public class CustomUserDetailService  implements UserDetailsService {
         if(user==null){
             throw new UsernameNotFoundException("User not found with email: "+username);
         }
-//        USER_ROLE role=USER_ROLE.
         List< GrantedAuthority> authority= new ArrayList<>();
-
+        USER_ROLE role= user.getRole();
+        authority.add(new SimpleGrantedAuthority(role.toString()));
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),authority );
     }
 }

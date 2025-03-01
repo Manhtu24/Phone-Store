@@ -8,11 +8,17 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 public class JwtValidatorFilter extends OncePerRequestFilter {
 
@@ -27,11 +33,11 @@ public class JwtValidatorFilter extends OncePerRequestFilter {
                  Claims claims= Jwts.parser().verifyWith(secretKey)
                          .build().parseSignedClaims(jwt).getPayload();
                  String email= String.valueOf(claims.get("email"));
-                 
-                 //Not Done yet;
+                 String authority= String.valueOf(claims.get("authorities"));
+                 List<GrantedAuthority> grandAuth= AuthorityUtils.commaSeparatedStringToAuthorityList(authority);
+                 Authentication authentication= new UsernamePasswordAuthenticationToken(email, null,grandAuth );
+                 SecurityContextHolder.getContext().setAuthentication(authentication);
              }
-
-
         }
         filterChain.doFilter(request, response);
     }

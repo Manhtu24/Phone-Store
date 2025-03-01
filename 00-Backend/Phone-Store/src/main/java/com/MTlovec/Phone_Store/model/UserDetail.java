@@ -1,15 +1,13 @@
 package com.MTlovec.Phone_Store.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
-@Entity
+//@Entity
 public class UserDetail {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userDetailId;
 
     private String firstName;

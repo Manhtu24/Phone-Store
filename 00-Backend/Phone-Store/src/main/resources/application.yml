@@ -3,9 +3,9 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/Phone-Store
     username: springstudent
-    password: springstudnet
+    password: springstudent
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     show-sql: true

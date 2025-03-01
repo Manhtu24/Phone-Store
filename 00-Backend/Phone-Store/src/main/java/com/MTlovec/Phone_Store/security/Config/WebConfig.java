@@ -1,11 +1,15 @@
 package com.MTlovec.Phone_Store.security.Config;
 
+import com.MTlovec.Phone_Store.security.CustomUsernamePwdAuthenticationProvider;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -13,6 +17,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.security.Provider;
 import java.util.Arrays;
 
 @Configuration
@@ -31,6 +36,18 @@ public class WebConfig {
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(UserDetailsService userDetailsService,
+                                                       PasswordEncoder passwordEncoder){
+        CustomUsernamePwdAuthenticationProvider authenticationProvider=
+                             new CustomUsernamePwdAuthenticationProvider(
+                                     passwordEncoder,
+                                     userDetailsService);
+        ProviderManager providerManager=new ProviderManager(authenticationProvider);
+        providerManager.setEraseCredentialsAfterAuthentication(false);
+        return providerManager;
     }
 
     private UrlBasedCorsConfigurationSource apiConfigurationSource() {

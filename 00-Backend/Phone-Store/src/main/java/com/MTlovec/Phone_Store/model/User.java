@@ -15,6 +15,7 @@ import java.util.Set;
 @Entity
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long userId;
 
     private  String email;
@@ -27,11 +28,11 @@ public class User {
 
      private Date createAt;
 
-     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
-     private UserDetail userDetail;
-
-     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-     private Set<Order> orders;
+//     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+//     private UserDetail userDetail;
+//
+//     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//     private Set<Order> orders;
 
 
 }

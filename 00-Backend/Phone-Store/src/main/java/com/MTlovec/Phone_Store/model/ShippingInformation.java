@@ -5,7 +5,7 @@ import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 import java.util.Date;
-@Data
+
 public class ShippingInformation {
     private Long shippingId;
 
