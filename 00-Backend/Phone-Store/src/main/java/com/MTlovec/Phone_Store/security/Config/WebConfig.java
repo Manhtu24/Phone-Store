@@ -1,6 +1,7 @@
 package com.MTlovec.Phone_Store.security.Config;
 
 import com.MTlovec.Phone_Store.security.CustomUsernamePwdAuthenticationProvider;
+import com.MTlovec.Phone_Store.security.Filter.JwtValidatorFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -28,7 +30,9 @@ public class WebConfig {
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(csrf->csrf.disable())
                 .cors(cors->cors.configurationSource(apiConfigurationSource()))
+                .addFilterBefore(new JwtValidatorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests(req->req.anyRequest().permitAll());
+
         return http.build();
     }
 

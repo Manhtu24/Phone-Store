@@ -5,6 +5,10 @@ import Layout from "../components/Layout/Layout";
 import Login from "../components/Authentication/Login";
 import Register from "../components/Authentication/Register";
 import Authentication from "../components/Authentication/Authentication";
+import ReturnPolicy from "../pages/ReturnPolicy";
+import WarrantyPolicy from "../pages/WarrabtyPolicy";
+import QualityCommit from "../pages/QualityCommit";
+import Introduce from "../pages/Introduce";
 
 const CustomerRoute = () => {
   return (
@@ -12,6 +16,11 @@ const CustomerRoute = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="home" element={<Home />} />
+          <Route path="chinh-sach-doi-tra" element={<ReturnPolicy />} />
+          <Route path="chinh-sach-bao-hanh" element={<WarrantyPolicy />} />
+          <Route path="cam-ket-chat-luong" element={<QualityCommit />} />
+          <Route path="gioi-thieu" element={<Introduce />} />
         </Route>
 
         <Route path="/account" element={<Layout />}>
@@ -22,14 +31,5 @@ const CustomerRoute = () => {
     </div>
   );
 };
-
-/*
-if always include header anđ footer
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="products" element={<ProductPage />} />
-          <Route path="contact" element={<ContactPage />} />
-        </Route>
-*/
 
 export default CustomerRoute;

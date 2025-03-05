@@ -26,7 +26,7 @@ const Register = () => {
           required
         />
         <input
-          type="number"
+          type="tel"
           name="phonenumber"
           placeholder="Số điện thoại"
           className="mb-3 p-2 w-[90%]  border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 "

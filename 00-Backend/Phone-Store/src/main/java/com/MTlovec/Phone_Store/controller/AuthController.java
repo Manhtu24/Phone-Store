@@ -38,6 +38,8 @@ public class AuthController {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final UserService userService;
+
     @PostMapping("/signIn")
     public ResponseEntity<AuthResponse> signIn(@RequestBody LogInRequest request){
         String email= request.getEmail();
@@ -74,5 +76,10 @@ public class AuthController {
             return  ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(Collections.singletonMap(HttpStatus.BAD_REQUEST.value(), "Register failed"));
         }
+    }
+    @PostMapping("/forgot-password")
+    public String forgotPassword(@RequestParam("email") String email){
+        userService.forgotPassword(email);
+        return "Done";
     }
 }

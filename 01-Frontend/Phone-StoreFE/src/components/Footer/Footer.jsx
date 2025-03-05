@@ -1,11 +1,12 @@
 import React from "react";
 import { assets } from "../../assets/images/images";
+import Avatar from "@mui/material/Avatar";
 
 const Footer = () => {
   return (
     <footer className="footer">
       {/* Top footer */}
-      <div className="top-footer px-4 md:px-16 lg:px-28 py-5 bg-black">
+      <div className=" px-4 md:px-16 lg:px-28 py-5 bg-black">
         <div className="container">
           <div className=" flex md:block lg:flex  justify-between  ">
             <div className="lg-">
@@ -31,25 +32,39 @@ const Footer = () => {
             </div>
             {/* Social */}
             <div className="lg-- ">
-              <div className="footer-social flex text-white">
+              <div className=" flex text-white items-center">
                 <span className="pr-2">Kết nối với chúng tôi</span>
-                <ul className="social flex gap-2">
+                <ul className=" flex gap-3 justify-center">
                   {/* Youtube */}
                   <li>
-                    <a href="https://www.youtube.com/@Apple" title="Youtube">
-                      <img src="" alt="Youtube" title="Youtube" />
+                    <a
+                      href="https://www.youtube.com/@Apple"
+                      title="Youtube"
+                      target="_balnk"
+                    >
+                      <Avatar alt="Youtube" src={assets.Youtube} />
                     </a>
                   </li>
                   {/* Facebook */}
                   <li>
-                    <a href="https://www.facebook.com/apple" title="Facebook">
-                      <img src="" alt="Facebook" title="Facebook" />
+                    <a
+                      href="https://www.facebook.com/apple"
+                      title="Facebook"
+                      target="_balnk"
+                    >
+                      <Avatar alt="Facebook" src={assets.Facebook} />
                     </a>
                   </li>
                   {/* Google */}
                   <li>
-                    <a href="/" title="Youtube">
-                      <img src="" alt="Youtube" title="Youtube" />
+                    <a href="/" title="Google" target="_balnk">
+                      <Avatar alt="Google" src={assets.Google} />
+                    </a>
+                  </li>
+                  {/* Zalo */}
+                  <li>
+                    <a href="/" title="Zalo">
+                      <Avatar alt="Zalo" src={assets.Zalo} />
                     </a>
                   </li>
                 </ul>
@@ -59,7 +74,7 @@ const Footer = () => {
         </div>
       </div>
       {/* medium footer */}
-      <div className="bg-white-300 px-4 md:px-16 lg:px-28 ">
+      <div className="bg-white-300 py-6 px-4 md:px-16 lg:px-28 ">
         {/* Chinh sach, Mua hang, Dieu khoa dich vu , Lien he */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mt-1">
           {/* COL1 */}
@@ -255,45 +270,45 @@ const Footer = () => {
               <li>
                 {/* SHOPEE PICTURE */}
                 <a href="#" title="Shopee">
-                  <img src="#" alt="Shopee" className="lazy-load" />
+                  <Avatar alt="Shopee" src={assets.Shopee} />
                 </a>
               </li>
               {/* LAZADA Picture */}
               <li>
                 <a href="#" title="Lazada">
-                  <img src="#" alt="Lazada" className="lazy-load" />
+                  <Avatar alt="Lazada" src={assets.lazada} />
                 </a>
               </li>
               {/* TIKI PICTURE */}
               <li>
                 <a href="#" title="Tiki">
-                  <img src="#" alt="Tiki" className="lazy-load" />
+                  <Avatar alt="Tiki" src={assets.Tiki} />
                 </a>
               </li>
               {/* Sendo picture */}
               <li>
                 <a href="#" title="Sendo">
-                  <img src="#" alt="Sendo" className="lazy-load" />
+                  <Avatar alt="Sendo" src={assets.Sendo} />
                 </a>
               </li>
             </ul>
             <h2 className="font-bold text-lg text-blue-500">
               HÌNH THỨC THANH TOÁN{" "}
             </h2>
-            <ul className="flex gap-4">
+            <ul className="flex gap-4 ">
               <li>
                 <a href="#" title="Tiền mặt">
-                  <img src="#" alt="Tiền mặt" />
+                  <Avatar alt="Tiền mặt" src={assets.cash} />
                 </a>
               </li>
               <li>
                 <a href="#" title="Chuyển khoản">
-                  <img src="#" alt="Chuyển khoản" />
+                  <Avatar alt="Chuyển khoản" src={assets.transfer} />
                 </a>
               </li>
               <li>
                 <a href="#" title="Visa">
-                  <img src="#" alt="Visa" />
+                  <Avatar alt="Visa" src={assets.visa} />
                 </a>
               </li>
             </ul>

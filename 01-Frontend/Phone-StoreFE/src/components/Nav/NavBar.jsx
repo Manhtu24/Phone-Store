@@ -6,7 +6,7 @@ import Header from "./Header";
 const NavBar = () => {
   return (
     <header>
-      <Header  />
+      <Header />
       <div className="header-menu">
         <div className="container">
           <div className="header-menu-des">
@@ -44,7 +44,7 @@ const NavBar = () => {
                     title="Linh Kiện"
                     className="hover:text-blue-500"
                   >
-                    Link kiện
+                    Linh kiện
                   </a>
                 </li>
                 <li className="nav-item">
@@ -80,6 +80,7 @@ const NavBar = () => {
                     href="https://www.facebook.com/apple"
                     title="Facebook Page"
                     className="hover:text-blue-500"
+                    target="_blank"
                   >
                     Facebook Page
                   </a>
