@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
 import { IconButton } from "@mui/material";
+import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import Login from "./Login";
 import Register from "./Register";
 
@@ -11,13 +12,19 @@ const Authentication = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
+  useEffect(() => {
+    const path = location.pathname.slice(9);
+    if (path === "register") {
+      setLoginBtn(false);
+    } else setLoginBtn(true);
+  }, [location.pathname]);
   return (
     <div className="bg-gray-300 pt-2">
       <div className="px-4 md:px-16 lg:px-28">
-        <div className="w-[35%] mx-auto bg-white">
+        <div className="w-[75%] md:w-[55%] lg:w-[45%] xl:w-[35%] mx-auto bg-white">
           <div className="p-2 flex">
             <button
-              className={`flex-1 py-2 font-semibold hover:text-blue-500 ${
+              className={`flex-1 py-2 font-semibold hover:text-blue-500  ${
                 isLoginBtn
                   ? "text-blue-500 border-b-2 border-blue-500"
                   : "text-gray-500"
@@ -37,7 +44,7 @@ const Authentication = () => {
               }`}
               onClick={() => {
                 setLoginBtn(false);
-                // navigate("/account/register");
+                navigate("/account/register");
               }}
             >
               ĐĂNG KÝ
@@ -51,7 +58,7 @@ const Authentication = () => {
           {isLoginBtn ? <Login /> : <Register />}
           <div className="p-3">
             <p className="text-center">Hay đăng nhập bằng</p>
-            <div className="flex justify-center pb-2 pt-2 gap-2 mx-2">
+            <div className="flex flex-col md:flex-row   justify-center pb-2 pt-2 gap-2 mx-2">
               <a
                 href="#"
                 title="Facebook"

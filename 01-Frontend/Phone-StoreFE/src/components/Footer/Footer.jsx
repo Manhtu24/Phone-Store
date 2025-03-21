@@ -6,23 +6,23 @@ const Footer = () => {
   return (
     <footer className="footer">
       {/* Top footer */}
-      <div className=" px-4 md:px-16 lg:px-28 py-5 bg-black">
-        <div className="container">
-          <div className=" flex md:block lg:flex  justify-between  ">
-            <div className="lg-">
+      <div className=" bg-black">
+        <div className=" md:mx-16 lg:mx-28 py-3">
+          <div className="flex sm:block md:block lg:flex xl:flex  justify-between items-center">
+            {/* FORM */}
+            <div className="text-center md:text-center">
               <form id="mc-form">
                 <input
                   type="email"
                   aria-label="Địa chỉ email"
-                  className="bg-white p-2 w-67"
+                  className="bg-white p-2 w-67 md:w-[80%] lg:w-77 "
                   placeholder="Nhập email nhận tin khuyến mại"
                   name="Email"
                   required
-                  autoComplete="off"
                 />
                 <button
                   type="submit"
-                  className="bg-red-600 p-2 text-white"
+                  className="bg-red-600 p-2 text-white hover:bg-red-500"
                   aria-label="Đăng ký nhận tin"
                   name="subscribe"
                 >
@@ -31,9 +31,11 @@ const Footer = () => {
               </form>
             </div>
             {/* Social */}
-            <div className="lg-- ">
-              <div className=" flex text-white items-center">
-                <span className="pr-2">Kết nối với chúng tôi</span>
+            <div className="md:pt-3">
+              <div className=" flex md:block lg:flex text-white items-center">
+                <p className="pr-2 md:text-center md:pb-1 ">
+                  Kết nối với chúng tôi
+                </p>
                 <ul className=" flex gap-3 justify-center">
                   {/* Youtube */}
                   <li>
@@ -57,13 +59,13 @@ const Footer = () => {
                   </li>
                   {/* Google */}
                   <li>
-                    <a href="/" title="Google" target="_balnk">
+                    <a href="#" title="Google" target="_balnk">
                       <Avatar alt="Google" src={assets.Google} />
                     </a>
                   </li>
                   {/* Zalo */}
                   <li>
-                    <a href="/" title="Zalo">
+                    <a href="#" title="Zalo">
                       <Avatar alt="Zalo" src={assets.Zalo} />
                     </a>
                   </li>
@@ -74,9 +76,9 @@ const Footer = () => {
         </div>
       </div>
       {/* medium footer */}
-      <div className="bg-white-300 py-6 px-4 md:px-16 lg:px-28 ">
+      <div className="bg-white-300 py-6 mx-4 md:mx-16 lg:mx-28 ">
         {/* Chinh sach, Mua hang, Dieu khoa dich vu , Lien he */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mt-1">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mt-1 py-9">
           {/* COL1 */}
           <div>
             <h2 className="text-lg font-bold mb-3 text-blue-500">CHÍNH SÁCH</h2>
@@ -209,7 +211,7 @@ const Footer = () => {
           </div>
         </div>
         {/* Tong dai ho tro , lien ket dich vu, lien ket san */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mt-10 ">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 pb-8 ">
           {/* COL1 */}
           <div className="col-span-1 lg:col-span-2 xl:col-span-1 ">
             <a href="/" title="Logo" className="">
@@ -263,10 +265,11 @@ const Footer = () => {
             </ul>
           </div>
           {/* LINK TO and Payment method */}
-          <div className="">
-            <h2 className="font-bold text-lg text-blue-500">LIÊN KẾT SÀN</h2>
-            <ul className="flex gap-4">
-              {/* SHOPEE PICTURE */}
+          <div className=" lg:mx-auto">
+            <h2 className="font-bold text-lg text-blue-500 pb-2">
+              LIÊN KẾT SÀN
+            </h2>
+            <ul className="flex gap-4 pb-3">
               <li>
                 {/* SHOPEE PICTURE */}
                 <a href="#" title="Shopee">
@@ -292,7 +295,7 @@ const Footer = () => {
                 </a>
               </li>
             </ul>
-            <h2 className="font-bold text-lg text-blue-500">
+            <h2 className="font-bold text-lg text-blue-500 pb-2">
               HÌNH THỨC THANH TOÁN{" "}
             </h2>
             <ul className="flex gap-4 ">
@@ -315,12 +318,13 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
       {/* buttom footer */}
-      <div className="bg-blue-400 mt-5">
+      <div className="bg-blue-400 mt-5 py-3">
         <div className="text-center">
           <p className="text-white">
-            Bản quyển thuộc về <span className="text-red-600">BMT</span>.Cung
-            cấp bởi <sapn className="text-red-500">BMT</sapn>
+            Bản quyển thuộc về <span className="text-red-600 ">BMT</span>.Cung
+            cấp bởi <sapn className="text-red-500 ">BMT</sapn>
           </p>
         </div>
       </div>

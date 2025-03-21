@@ -15,6 +15,10 @@ import transfer from "./transfer_money.png";
 import visa from "./visa.webp";
 import warranty from "./Chinh-sach-bao-hanh.webp";
 
+import home1 from "./home1.webp";
+import smallHome1 from "./smallHome1.webp";
+import smallHome2 from "./smallHome2.webp";
+
 export const assets = {
   logo,
   lazada,
@@ -28,5 +32,8 @@ export const assets = {
   cash,
   transfer,
   visa,
-  warranty
+  warranty,
+  home1,
+  smallHome1,
+  smallHome2,
 };

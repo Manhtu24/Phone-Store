@@ -57,25 +57,30 @@ const Login = () => {
         </p>
       </div>
 
-      {isForgotPassword ? (
-        <div className="pt-4 ">
-          <form action="" className="flex flex-col items-center">
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              className="mb-3 w-[90%]  p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 "
-              required
-            />
-            <button
-              type="submit"
-              className="w-[90%] bg-blue-500 text-white py-2 rounded hover:bg-red-600 transition"
-            >
-              Lấy lại mật khẩu
-            </button>
-          </form>
-        </div>
-      ) : null}
+      <div
+        className={`overflow-hidden transition-all duration-700 ${
+          isForgotPassword
+            ? "max-h-[200px] opacity-100 mt-3"
+            : "max-h-0 opacity-0"
+        }`}
+      >
+        <form action="" className="flex flex-col items-center">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            className="mb-3 w-[90%]  p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 "
+            required
+          />
+          <button
+            type="submit"
+            className="w-[90%] bg-blue-500 text-white py-2 rounded hover:bg-red-600 transition"
+            onClick={() => setForgotPassword(false)}
+          >
+            Lấy lại mật khẩu
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

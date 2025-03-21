@@ -22,7 +22,6 @@ const CustomerRoute = () => {
           <Route path="cam-ket-chat-luong" element={<QualityCommit />} />
           <Route path="gioi-thieu" element={<Introduce />} />
         </Route>
-
         <Route path="/account" element={<Layout />}>
           <Route path="login" element={<Authentication />} />
           <Route path="register" element={<Authentication />} />
