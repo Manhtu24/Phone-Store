@@ -1,19 +1,30 @@
 package com.MTlovec.Phone_Store.model;
 
-import java.util.Date;
+import jakarta.persistence.*;
+import lombok.Data;
+import java.time.LocalDateTime;
 
+
+@Data
+@Entity
+@Table(name = "categories")
 public class Category {
-    private Long categoryId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private String categoryName;
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Category parent;
 
-    private String categoryDescription;
+    @Column(unique = true)
+    private String name;
 
-    private Date createAt;
+    private String description;
 
+    private LocalDateTime createAt;
 
-
-
-
-
+    public Category(){
+        this.createAt= LocalDateTime.now();
+    }
 }

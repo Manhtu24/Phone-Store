@@ -1,38 +1,43 @@
 package com.MTlovec.Phone_Store.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "promotions")
 public class Promotion {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private  String code;
 
     private BigDecimal value;
 
-    private Date startTime;
+    private String name;
 
-    private  Date expiredTime;
+    private LocalDate startTime;
+
+    private  LocalDate expiredTime;
 
     private BigDecimal minOrderAmount;// min purchase amount to apply th this code
 
-    private BigDecimal maxDiscount; // max decrease value
+    private  Integer maxUsage; // number of this voucher
 
-    private  int maxUsage; // number of this voucher
+    private boolean status=true;
 
-    private int usedCount;
-
-    private String status;
-
-    private String description;
-
-    private Date createAt;
-
-    private Date updateAt;
-
-
-
+    private LocalDateTime createAt;
 
 }

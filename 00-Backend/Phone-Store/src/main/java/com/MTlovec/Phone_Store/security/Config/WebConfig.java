@@ -32,7 +32,6 @@ public class WebConfig {
                 .cors(cors->cors.configurationSource(apiConfigurationSource()))
                 .addFilterBefore(new JwtValidatorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests(req->req.anyRequest().permitAll());
-
         return http.build();
     }
 
@@ -56,10 +55,11 @@ public class WebConfig {
 
     private UrlBasedCorsConfigurationSource apiConfigurationSource() {
         CorsConfiguration corsConfiguration= new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
-        corsConfiguration.setAllowedMethods(Arrays.asList("GET","POST"));
-        corsConfiguration.setAllowedHeaders(Arrays.asList("Content-Type","Authorization"));
+        corsConfiguration.setAllowedOriginPatterns(Arrays.asList("http://localhost:5173"));
+        corsConfiguration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE","OPTIONS"));
+        corsConfiguration.setAllowedHeaders(Arrays.asList("*"));
         corsConfiguration.setExposedHeaders(Arrays.asList("Authorization"));
+        corsConfiguration.setAllowCredentials(true);
         corsConfiguration.setMaxAge(3600L); //3600 second
         UrlBasedCorsConfigurationSource source= new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**",corsConfiguration);

@@ -15,11 +15,13 @@ import org.springframework.security.authentication.*;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -52,32 +54,38 @@ public class AuthController {
         if( authenticationResponse!=null){
             jwt= jwtGenerator.GenerateToken(authenticationResponse);
         }
-        return ResponseEntity.status(HttpStatus.OK).header(ApplicationConstant.JWT_HEADER,jwt)
+        return  ResponseEntity.status(HttpStatus.OK).header(ApplicationConstant.JWT_HEADER,jwt)
                 .body(new AuthResponse(jwt,
-                        "Login success" ,
+                        "Login success",
                                  HttpStatus.OK.value(),
                                  USER_ROLE.valueOf(role)));
     }
     @PostMapping("/register")
-    public ResponseEntity<Map<Integer, String>> signUp(@RequestBody User user){
+    public ResponseEntity<AuthResponse> signUp(@RequestBody User user){
         User exittedUser = userRepository.findByEmail(user.getEmail()).orElse(null);
         if(exittedUser!=null){
             throw new  BadCredentialsException("Email is already exist");
         }
         String hashPwd= passwordEncoder.encode(user.getPassword());
         user.setPassword(hashPwd);
+        user.setRole(user.getRole());
         user.setCreateAt(new Date());
-
         User savedUser= userRepository.save(user);
-        if (savedUser.getUserId()>0){
-            return  ResponseEntity.status(HttpStatus.CREATED)
-                    .body(Collections.singletonMap(HttpStatus.CREATED.value(), "Register success"));
-        }else{
-            return  ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(Collections.singletonMap(HttpStatus.BAD_REQUEST.value(), "Register failed"));
+        if (savedUser.getId()>0){
+            //Automatic sign in if register success
+            Authentication authentication= new UsernamePasswordAuthenticationToken(savedUser.getEmail(), savedUser.getPassword());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String jwt=jwtGenerator.GenerateToken(authentication);
+            return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(
+                    jwt,"Register success",HttpStatus.CREATED.value(),savedUser.getRole()
+            ));
+        }else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body(new AuthResponse(null, "User Register Failed",
+                            HttpStatus.BAD_REQUEST.value(),null ));
         }
     }
-    @PostMapping("/forgot-password")
+    @GetMapping("/forgot-password")
     public String forgotPassword(@RequestParam("email") String email){
         userService.forgotPassword(email);
         return "Done";

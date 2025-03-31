@@ -33,7 +33,7 @@ public class JWTGenerator {
     public String getEmailFromJWT(String jwt){
         String subJWT= jwt.substring(7);
         Claims claims= Jwts.parser().verifyWith(secretKey)
-                .build().parseSignedClaims(jwt).getPayload();
+                .build().parseSignedClaims(subJWT).getPayload();
         String email= String.valueOf(claims.get("email"));
         return email;
     }

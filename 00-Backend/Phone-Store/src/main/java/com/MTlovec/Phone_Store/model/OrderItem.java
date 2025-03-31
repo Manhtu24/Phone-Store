@@ -1,13 +1,15 @@
 package com.MTlovec.Phone_Store.model;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
+//@Entity
+@Data
 public class OrderItem {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderItemId;
 
     private int quantity;
@@ -18,9 +20,7 @@ public class OrderItem {
     @ManyToOne
     private Order order;
 
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "variant_option_id")
     @OneToOne
-    private Product product;
-
-
+    private VariantOption variantOption;
 }
