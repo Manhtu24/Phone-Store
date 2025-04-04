@@ -8,28 +8,31 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.Internal;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//@Entity
-public class News {
+@Entity
+public class Banner {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
+    private String imageUrl;
 
-    private String author;
+    private String bannerType;
 
-    private String describe;
+    private String pageName;
 
-    private String description; //html format
+    private String publicId;
 
-    private String coverPhoto; //this is url of image (take from FE);
+    private Integer imageOrder;
 
     private LocalDateTime createAt;
 }

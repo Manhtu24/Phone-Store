@@ -31,7 +31,8 @@ public class WebConfig {
                 .csrf(csrf->csrf.disable())
                 .cors(cors->cors.configurationSource(apiConfigurationSource()))
                 .addFilterBefore(new JwtValidatorFilter(), BasicAuthenticationFilter.class)
-                .authorizeHttpRequests(req->req.anyRequest().permitAll());
+                .authorizeHttpRequests(req->req.requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .anyRequest().permitAll());
         return http.build();
     }
 

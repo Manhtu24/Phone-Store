@@ -66,6 +66,7 @@ public class AuthController {
         if(exittedUser!=null){
             throw new  BadCredentialsException("Email is already exist");
         }
+        String password=user.getPassword();
         String hashPwd= passwordEncoder.encode(user.getPassword());
         user.setPassword(hashPwd);
         user.setRole(user.getRole());
@@ -73,9 +74,11 @@ public class AuthController {
         User savedUser= userRepository.save(user);
         if (savedUser.getId()>0){
             //Automatic sign in if register success
-            Authentication authentication= new UsernamePasswordAuthenticationToken(savedUser.getEmail(), savedUser.getPassword());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            String jwt=jwtGenerator.GenerateToken(authentication);
+            Authentication authentication= UsernamePasswordAuthenticationToken.unauthenticated(user.getEmail(),password);
+            Authentication authenticationResponse= authenticationManager.authenticate(authentication);
+//            Authentication authentication= new UsernamePasswordAuthenticationToken(savedUser.getEmail(), savedUser.getPassword());
+//            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String jwt=jwtGenerator.GenerateToken(authenticationResponse);
             return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(
                     jwt,"Register success",HttpStatus.CREATED.value(),savedUser.getRole()
             ));

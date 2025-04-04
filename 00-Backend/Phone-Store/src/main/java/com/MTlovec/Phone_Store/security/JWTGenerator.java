@@ -19,6 +19,7 @@ public class JWTGenerator {
     private SecretKey secretKey= Keys.hmacShaKeyFor(ApplicationConstant.JWT_SECRET_KEY.getBytes());
 
     public  String  GenerateToken(Authentication authentication){
+
         String jwt= Jwts.builder().issuer("BMT").subject("JWT Token")
                 .claim("email",authentication.getName() )
                 .claim("authorities", authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
@@ -28,6 +29,7 @@ public class JWTGenerator {
                 .signWith(secretKey)
                 .compact();
         log.info("Generate success jwt");
+        log.info("authorities",authentication.getAuthorities());
         return  jwt;
     }
     public String getEmailFromJWT(String jwt){

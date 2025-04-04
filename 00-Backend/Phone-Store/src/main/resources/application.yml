@@ -13,7 +13,7 @@ spring:
     show-sql: true
   mail:
     username: tumanhbui247@gmail.com
-    password:
+    password: uhrglevswwfzaikn
     host: smtp.gmail.com
     port: 587
     properties:

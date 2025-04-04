@@ -22,7 +22,6 @@ public class CustomUsernamePwdAuthenticationProvider implements AuthenticationPr
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String name= authentication.getName();
         String password= authentication.getCredentials().toString();
-
         UserDetails userDetails= userDetailsService.loadUserByUsername(name);
         if(passwordEncoder.matches(password, userDetails.getPassword())){
             return new UsernamePasswordAuthenticationToken(name,password,userDetails.getAuthorities());

@@ -52,7 +52,7 @@ public class BrandServiceImpl implements  BrandService{
 
     @Override
     public BrandResponse createBrand(Brand brand) {
-        if(!brandRepository.existsByName(brand.getName())){
+        if(brandRepository.existsByName(brand.getName())){
             throw  new RuntimeException("Brand name already exist");
         }
         Brand brand1= brandRepository.save(brand);
