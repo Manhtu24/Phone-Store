@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -13,22 +14,23 @@ import java.util.List;
 public class ProductVariant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long productVariantID;
+    private Long id;
 
     private String name;
 
-    private String storage;
-
-    private BigDecimal extraPrice;//for special color or
-
-    private String condition; //new, like new,...
-
     private int stock;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id" )
-    private Product product;
+    private BigDecimal importPrice;
 
-    @OneToOne(mappedBy = "productVariant", cascade = CascadeType.ALL)
-    private ProductImage image;
+    private BigDecimal sellPrice;
+
+    private String sku;//stock  keeping unit (dung de luu id cua cac variant ma ta muon tao ra mix giua chung)
+
+    @OneToMany
+    @JoinColumn(name = "product_variant_id")
+    private ProductImage productImage;
+
+    private LocalDateTime createAt;
+
+
 }

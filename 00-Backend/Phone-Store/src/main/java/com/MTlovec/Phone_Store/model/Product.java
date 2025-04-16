@@ -1,23 +1,26 @@
 package com.MTlovec.Phone_Store.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 //@Entity
-@Data
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long productId;
+    private Long id;
 
-    private String productName;
-
-    private  BigDecimal basePrice;
+    private String name;
 
     private String description;
 
@@ -25,12 +28,18 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<ProductVariant> variants;
+    @OneToMany
+    @JoinColumn(name = "product_id")
+    private List<VariantValues> variantValues;
 
-    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
-    private List<ProductImage> images;
+    @OneToMany
+    @JoinColumn(name = "product_id",nullable = true)
+    private List<ProductImage> productImages;
 
-    private Date createAt;
+    @OneToMany
+    @JoinColumn(name = "related_id")
+    private List<Image> descriptionImages;
+
+    private LocalDateTime createAt;
 
 }
