@@ -2,6 +2,8 @@ package com.MTlovec.Phone_Store.security.Config;
 
 import com.MTlovec.Phone_Store.security.CustomUsernamePwdAuthenticationProvider;
 import com.MTlovec.Phone_Store.security.Filter.JwtValidatorFilter;
+import com.MTlovec.Phone_Store.security.HandleException.CustomAccessDeniedHandler;
+import com.MTlovec.Phone_Store.security.HandleException.CustomAuthenticationEntryPoint;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,17 +27,21 @@ import java.util.Arrays;
 @Configuration
 public class WebConfig {
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain securityFilterChain(HttpSecurity http,
+                                            CustomAuthenticationEntryPoint authenticationEntryPoint,
+                                            CustomAccessDeniedHandler accessDeniedHandler) throws Exception {
         http
-                .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .csrf(csrf->csrf.disable())
-                .cors(cors->cors.configurationSource(apiConfigurationSource()))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(apiConfigurationSource()))
                 .addFilterBefore(new JwtValidatorFilter(), BasicAuthenticationFilter.class)
-                .authorizeHttpRequests(req->req.requestMatchers("/api/admin/**").hasRole("ADMIN")
-                        .anyRequest().permitAll());
+                .authorizeHttpRequests(req -> req.requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .anyRequest().permitAll())
+                .exceptionHandling(exception->exception
+                        .accessDeniedHandler(accessDeniedHandler)
+                        .authenticationEntryPoint(authenticationEntryPoint));
         return http.build();
     }
-
 
     @Bean
     public PasswordEncoder passwordEncoder(){

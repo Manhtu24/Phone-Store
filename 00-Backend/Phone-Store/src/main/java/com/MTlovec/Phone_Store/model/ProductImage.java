@@ -3,7 +3,7 @@ package com.MTlovec.Phone_Store.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 //@Entity
 @Data
@@ -13,17 +13,12 @@ public class ProductImage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id",nullable = true)
-    private Product product;
-
-    @OneToOne
-    @JoinColumn(name = "productVariant_id",nullable = true)
-    private ProductVariant productVariant;
-
     private String imageUrl;
 
-    private boolean isPrimary;
+    private String publicId;
 
-    private Date createAt;
+    private boolean isMainImage;
+
+    private LocalDate createAt;
+
 }

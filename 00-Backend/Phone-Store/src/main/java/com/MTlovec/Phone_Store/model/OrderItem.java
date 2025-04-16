@@ -20,7 +20,4 @@ public class OrderItem {
     @ManyToOne
     private Order order;
 
-    @JoinColumn(name = "variant_option_id")
-    @OneToOne
-    private VariantOption variantOption;
 }

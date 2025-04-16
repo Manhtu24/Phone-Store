@@ -3,6 +3,7 @@ package com.MTlovec.Phone_Store.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Data
@@ -21,6 +22,9 @@ public class Category {
     private String name;
 
     private String description;
+
+    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
+    private List<Product> products;
 
     private LocalDateTime createAt;
 
