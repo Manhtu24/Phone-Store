@@ -1,8 +1,10 @@
 package com.MTlovec.Phone_Store.service;
 
 
+import com.MTlovec.Phone_Store.exception.AlreadyExistException;
 import com.MTlovec.Phone_Store.exception.NotFoundException;
 import com.MTlovec.Phone_Store.exception.PasswordNotMatchException;
+import com.MTlovec.Phone_Store.model.LOGIN_TYPE;
 import com.MTlovec.Phone_Store.model.USER_ROLE;
 import com.MTlovec.Phone_Store.model.User;
 import com.MTlovec.Phone_Store.repository.UserRepository;
@@ -86,10 +88,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User addUser(User user){
+        User newUser= userRepository.findByEmail(user.getEmail()).orElse(null);
+        if(newUser!=null){
+            throw  new AlreadyExistException("Email already used with another account");
+        }
+        user.setCreateAt(new Date());
+        user.setPassword("");
+        user.setType(LOGIN_TYPE.GOOGLE);
+        return userRepository.save(user);
+    }
+    @Override
     public User addAdminUser(User user) {
         User newUser= userRepository.findByEmail(user.getEmail()).orElse(null);
         if(newUser!=null){
-            throw  new RuntimeException("Email already used with another account");
+            throw  new AlreadyExistException("Email already used with another account");
         }
         user.setRole(USER_ROLE.ROLE_ADMIN);
         user.setCreateAt(new Date());

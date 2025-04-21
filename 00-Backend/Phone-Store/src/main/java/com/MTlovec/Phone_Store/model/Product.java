@@ -28,11 +28,15 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToMany
-    @JoinColumn(name = "product_id")
-    private List<VariantValues> variantValues;
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
 
-    @OneToMany
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
+    private List<ProductVariant> productVariants;
+
+
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id",nullable = true)
     private List<ProductImage> productImages;
 
@@ -41,5 +45,4 @@ public class Product {
     private List<Image> descriptionImages;
 
     private LocalDateTime createAt;
-
 }

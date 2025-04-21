@@ -14,6 +14,8 @@ import java.util.Optional;
 public interface UserService {
     void forgotPassword(String email);
 
+    User addUser(User user);
+
      User findByJwt(String jwt);
 
      Page<UserResponse> getUsers(int page, int size,String role,String search);

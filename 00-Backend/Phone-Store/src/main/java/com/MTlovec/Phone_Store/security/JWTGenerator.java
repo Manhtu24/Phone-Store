@@ -30,7 +30,7 @@ public class JWTGenerator {
                 .compact();
         log.info("Generate success jwt");
         log.info("authorities",authentication.getAuthorities());
-        return  jwt;
+        return jwt;
     }
     public String getEmailFromJWT(String jwt){
         String subJWT= jwt.substring(7);

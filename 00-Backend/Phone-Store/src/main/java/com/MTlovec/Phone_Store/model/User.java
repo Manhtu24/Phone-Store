@@ -31,6 +31,8 @@ public class User {
 
     private USER_ROLE role= USER_ROLE.ROLE_USER;
 
+    private LOGIN_TYPE type=LOGIN_TYPE.NORMAL;
+
     private Date createAt;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL,orphanRemoval = true)

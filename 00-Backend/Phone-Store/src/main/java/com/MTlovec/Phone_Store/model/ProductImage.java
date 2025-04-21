@@ -1,12 +1,16 @@
 package com.MTlovec.Phone_Store.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDate;
 
-//@Entity
-@Data
+
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "product_images")
 public class ProductImage {
     @Id
@@ -20,5 +24,4 @@ public class ProductImage {
     private boolean isMainImage;
 
     private LocalDate createAt;
-
 }

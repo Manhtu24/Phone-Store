@@ -16,8 +16,9 @@ public class ProductRequest {
     private String name;
     private String description;
     private Long brandId;
+    private Long categoryId;
     private List<ImageRequest> descriptionImages;
     private List<ImageRequest> productImages;
-    private List<VariantRequest> variants;
+    private List<VariantInput> variants;
     private List<ProductVariantRequest> productVariants;
 }

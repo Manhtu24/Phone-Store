@@ -18,8 +18,7 @@ public class Variants {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
-    @JoinColumn(name = "variant_id")
+    @OneToMany(mappedBy = "variants",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<VariantValues>variantValues;
 
     private LocalDateTime createAt;

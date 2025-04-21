@@ -1,5 +1,6 @@
 package com.MTlovec.Phone_Store.security;
 
+import com.MTlovec.Phone_Store.model.LOGIN_TYPE;
 import com.MTlovec.Phone_Store.service.CustomUserDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -22,12 +23,13 @@ public class CustomUsernamePwdAuthenticationProvider implements AuthenticationPr
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String name= authentication.getName();
         String password= authentication.getCredentials().toString();
-        UserDetails userDetails= userDetailsService.loadUserByUsername(name);
-        if(passwordEncoder.matches(password, userDetails.getPassword())){
-            return new UsernamePasswordAuthenticationToken(name,password,userDetails.getAuthorities());
-        }else{
-            throw new BadCredentialsException("Invalid password...");
+        CustomUserDetail userDetails= (CustomUserDetail) userDetailsService.loadUserByUsername(name);
+        if (userDetails.loginType() == LOGIN_TYPE.NORMAL) {
+            if (!passwordEncoder.matches(password, userDetails.getPassword())) {
+                throw new BadCredentialsException("Invalid password...");
+            }
         }
+        return new UsernamePasswordAuthenticationToken(name, password, userDetails.getAuthorities());
     }
 
     @Override
